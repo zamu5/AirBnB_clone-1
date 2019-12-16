@@ -63,5 +63,8 @@ class FileStorage:
             pass
 
     def delete(self, obj=None):
+        """
+        delete an object from __objects.
+        """
         st = obj.__class__.__name__ + "." + obj.id
         self.__objects.pop(st)

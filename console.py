@@ -38,10 +38,21 @@ class HBNBCommand(cmd.Cmd):
             SyntaxError: when there is no args given
             NameError: when there is no object taht has the name
         """
+        at_integers = ['my_integers', 'number_rooms', 'number_bathrooms',
+                       'max_guest', 'price_by_night', 'my_number']
+        at_floats = ['latitude', 'longitude']
+        at_datetime = ['created_at', 'updated_at']
+        dict1 = {}
+        My_list2 = []
         try:
             if not line:
                 raise SyntaxError()
             my_list = line.split(" ")
+            for item in my_list:
+                if "=" in item:
+                    my_list2 = item.split("=")
+            dict1 = {my_list2[i]: my_list2[i + 1] for i in range(0, len(my_list2), 2)} 
+            print(dict1)
             obj = eval("{}()".format(my_list[0]))
             obj.save()
             print("{}".format(obj.id))

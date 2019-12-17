@@ -38,10 +38,6 @@ class HBNBCommand(cmd.Cmd):
             SyntaxError: when there is no args given
             NameError: when there is no object taht has the name
         """
-        at_integers = ['my_integers', 'number_rooms', 'number_bathrooms',
-                       'max_guest', 'price_by_night', 'my_number']
-        at_floats = ['latitude', 'longitude']
-        at_datetime = ['created_at', 'updated_at']
         dict1 = {}
         My_list2 = []
         try:
@@ -49,7 +45,6 @@ class HBNBCommand(cmd.Cmd):
                 raise SyntaxError()
             my_list = line.split(" ")
             obj = eval("{}()".format(my_list[0]))
-            obj.save()
             for item in my_list:
                 if "=" in item:
                     kv = item.split("=")
@@ -57,11 +52,12 @@ class HBNBCommand(cmd.Cmd):
                         kv[1] = kv[1][1:-1].replace('"', '\\"')
                     kv[1] = kv[1].replace('_', ' ')
                     setattr(obj, kv[0], kv[1])
+            obj.save()
             print("{}".format(obj.id))
         except SyntaxError:
             print("** class name missing **")
         except NameError:
-            print("** class doesn't exist **")
+             print("** class doesn't exist **")
 
     def do_show(self, line):
         """Prints the string representation of an instance

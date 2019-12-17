@@ -16,8 +16,7 @@ class State(BaseModel, Base):
     name = Column(String(128), nullable=False)
     if 'HBNB_TYPE_STORAGE' in environ and environ['HBNB_TYPE_STORAGE'] == 'db':
         cities = relationship('City', cascade="all, delete-orphan",
-                              backref=backref("state", cascade="all"),
-                              single_parent=True)
+                              backref="state")
 
     else:
         lis = []

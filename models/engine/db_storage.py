@@ -38,15 +38,14 @@ class DBStorage():
             for c in self.cla:
                 row = self.__session.query(c).all()
                 for k in row:
-                    key = ".".join([cls, k.id])
+                    key = ".".join([c.__name__, k.id])
                     dic.update({key: k})
             return dic
-        else:
-            row = self.__session.query(eval(cls)).all()
-            for k in row:
-                key = ".".join([cls, k.id])
-                dic.update({key: k})
-            return dic
+        row = self.__session.query(eval(cls)).all()
+        for k in row:
+            key = ".".join([cls, k.id])
+            dic.update({key: k})
+        return dic
 
     def new(self, obj):
         self.__session.add(obj)

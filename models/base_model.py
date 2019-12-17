@@ -3,7 +3,11 @@
 import uuid
 import models
 from datetime import datetime
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy import Column, Integer, String
 
+
+Base = declarative_base()
 
 class BaseModel:
     """This class will defines all common attributes/methods
@@ -20,6 +24,11 @@ class BaseModel:
             created_at: creation date
             updated_at: updated date
         """
+        id = column(String(60), nullable=False, primary_key=True)
+        created_at = column(DateTime, default=datetime.datetime.utcnow,
+                            nullable=False)
+        updated_at = column(DateTime, default=datetime.datetime.utcnow,
+                            nullable=False)
         if kwargs:
             for key, value in kwargs.items():
                 if key == "created_at" or key == "updated_at":

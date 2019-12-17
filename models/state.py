@@ -25,7 +25,7 @@ class State(BaseModel, Base):
         @property
         def cities(self):
             stat = self.id
-            for k, v in models.storege.all().items():
+            for k, v in models.storage.all().items():
                 if "City" in k and v.state_id == self.id:
                     lis.append(v)
             return lis

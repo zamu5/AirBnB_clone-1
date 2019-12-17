@@ -3,6 +3,7 @@
 from models.base_model import BaseModel, Base
 from sqlalchemy import Column, Integer, String, ForeignKey, Float
 from sqlalchemy.orm import relationship, backref
+from os import environ
 
 
 class Place(BaseModel, Base):
@@ -32,3 +33,15 @@ class Place(BaseModel, Base):
     latitude = Column(Float)
     longitude = Column(Float)
     amenity_ids = []
+    if 'HBNB_TYPE_STORAGE' in environ and environ['HBNB_TYPE_STORAGE'] == 'db':
+        reviews = relationship('Review', backref="places")
+    else:
+        lis = []
+
+        @property
+        def review(self):
+            stat = self.id
+            for k, v in models.storage.all().items():
+                if "Review" in k and v.state_id == self.id:
+                    lis.append(v)
+            return lis

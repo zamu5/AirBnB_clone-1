@@ -20,7 +20,7 @@ class DBStorage():
     """
     __engine = None
     __session = None
-    cla = [State, City, User, Place, Review]
+    cla = [State, City, User, Place, Review, Amenity]
 
     def __init__(self):
         self.__engine = create_engine('mysql+mysqldb://{}:{}@{}/{}'.

@@ -7,8 +7,12 @@ from os import environ
 from sqlalchemy import Table, Text
 
 place_amenity = Table('place_amenity', Base.metadata,
-                      Column('place_id', String(60), ForeignKey('places.id'), primary_key=True, nullable=False),
-                      Column('amenity_id', String(60), ForeignKey('amenities.id'), primary_key=True, nullable=False))
+                      Column('place_id', String(60), ForeignKey('places.id'),
+                             primary_key=True, nullable=False),
+                      Column('amenity_id', String(60),
+                             ForeignKey('amenities.id'),
+                             primary_key=True, nullable=False))
+
 
 class Place(BaseModel, Base):
     """This is the class for Place
@@ -39,7 +43,10 @@ class Place(BaseModel, Base):
     amenity_ids = []
     if 'HBNB_TYPE_STORAGE' in environ and environ['HBNB_TYPE_STORAGE'] == 'db':
         reviews = relationship('Review', backref="places")
-        amenities = relationship('Amenity', secondary="place_amenity", back_populates='place_amenities', viewonly=False)
+        amenities = relationship('Amenity',
+                                 secondary="place_amenity",
+                                 back_populates='place_amenities',
+                                 viewonly=False)
     else:
         lis = []
 

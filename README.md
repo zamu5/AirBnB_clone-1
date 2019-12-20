@@ -25,6 +25,7 @@ To start, navigate to the project folder and enter `./console.py` in the shell.
 `create <class name>`
 Ex:
 `create BaseModel`
+Suport attributes and values
 
 #### Show
 `show <class name> <object id>`

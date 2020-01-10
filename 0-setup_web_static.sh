@@ -10,3 +10,4 @@ chown -R ubntu:ubuntu /data
 str='\\tlocation /hbnb_static/ {\n\t\talias /data/web_static/current/;\n\t}'
 sed -i "38i $str" /etc/nginx/sites-available/default
 sudo service nginx restart
+exit 0

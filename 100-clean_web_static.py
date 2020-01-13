@@ -12,14 +12,19 @@ env.user = "ubuntu"
 def do_clean(number=0):
     nombres = local('ls -t versions/', capture=True)
     nombres = nombres.split('\n')
-    if number == 0:
+    if number == "0":
         number = 1
     for i in range(int(number), len(nombres)):
         local('rm versions/{}'.format(nombres[i]))
     nombres = run('ls -t /data/web_static/releases |  grep -v "^test"')
     nombres = nombres.split('\n')
+    st = ""
     for i in range(int(number), len(nombres)):
-        run('rm -rf /data/web_static/releases/{}'.format(nombres[i]))
+        if nombres[i][-1] == "\r":
+            st = st + "/data/web_static/releases/" + nombres[i][:-1] + " "
+        else:
+            st = st + "/data/web_static/releases/" + nombres[i] + " "
+    run('rm -rf {}'.format(st))
 
 
 def deploy():
